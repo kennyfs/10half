@@ -95,6 +95,9 @@ class holder:
 				print(str(win)+' dollars')
 				self.money+=win
 				return
+	def set_moneytoplay(self):
+		for player in self.players:
+			player.set_moneytoplay()
 class player:
 	def __init__(self,money,num):
 		self.num=num
@@ -140,12 +143,21 @@ class player:
 	def ended(self):
 		self.living=False
 		self.end=True
+	def set_moneytoplay(self):
+		while 1:
+			print('player(',self.num,')How much do you want to gamble?')
+			a=int(input())
+			if a<=self.money:
+				break
+			print('You don\'t have such money.')
+		self.moneytoplay=a
 def progress():
 	players=[]
 	for i in range(2):
 		players.append(player(100,i))
 	hold=holder(100,players)
 	while 1:
+		hold.set_moneytoplay()
 		print('holder\'s money=',hold.money)
 		for p in hold.players:
 			print(p.num,p.money)
